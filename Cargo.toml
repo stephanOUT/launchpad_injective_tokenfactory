@@ -1,5 +1,5 @@
 [package]
-name = "inj-n-token"
+name = "ntoken"
 version = "0.1.0"
 authors = ["Vegetable Destroyer <dreamsky0701@hotmail.com>"]
 edition = "2021"
