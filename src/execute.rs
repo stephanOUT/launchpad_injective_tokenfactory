@@ -2,7 +2,7 @@ use cw20_base::ContractError;
 
 use cosmwasm_std::{
     DepsMut, Env, MessageInfo, Response, Uint128,
-    StdResult, Storage, Binary
+    StdResult, Storage, Binary, BankMsg, coin
 };
 use cw_utils::Expiration;
 use cw20_base::msg::{
@@ -127,7 +127,7 @@ pub fn send_sell_fee(
     let fee_transfer_msg = BankMsg::Send {
         to_address: recipient.clone(),
         amount: vec![coin(
-            amount,
+            amount.into(),
             "inj",
         )],
     };
@@ -143,7 +143,7 @@ pub fn send_sell(
     let fee_transfer_msg = BankMsg::Send {
         to_address: recipient.clone(),
         amount: vec![coin(
-            amount,
+            amount.into(),
             "inj",
         )],
     };

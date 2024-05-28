@@ -14,6 +14,13 @@ use cw2::set_contract_version;
 use crate::msg::InstantiateMsg;
 use crate::state::{ TokenInfo, TOKENINFO};
 use cw20_base::msg::{ InstantiateMsg as cw20BaseInstantiateMsg };
+use cw20_base::msg::{ QueryMsg as cw20BaseQueryMsg };
+use cw20_base::allowances::{
+    query_allowance
+};
+use cw20_base::contract:: {
+    query_balance, query_token_info, query_minter, query_marketing_info, query_download_logo
+};
 
 use crate::msg::ExecuteMsg;
 use crate::msg::QueryMsg::{ QueryTokenInformation };
@@ -125,26 +132,26 @@ pub fn execute(
 #[cfg_attr(not(feature = "library"), entry_point)]
 pub fn query(deps: Deps, _env: Env, msg: QueryMsg) -> StdResult<Binary> {
     match msg {
-        QueryMsg::base_query_msg(cw20_base_msg) => cw20BaseQuery(deps, _env, cw20_base_msg),
+        // QueryMsg::base_query_msg(cw20_base_msg) => cw20BaseQuery(deps, _env, cw20_base_msg),
         QueryMsg::QueryTokenInformation {} => query_token_information(deps),
         /* Default methods from CW20 Standard with no modifications:
         https://github.com/CosmWasm/cw-plus/tree/main/contracts/cw20-base */
-/*        QueryMsg::Balance { address } => to_binary(&query_balance(deps, address)?),
+        QueryMsg::Balance { address } => to_binary(&query_balance(deps, address)?),
         QueryMsg::TokenInfo {} => to_binary(&query_token_info(deps)?),
         QueryMsg::Minter {} => to_binary(&query_minter(deps)?),
         QueryMsg::Allowance { owner, spender } => {
             to_binary(&query_allowance(deps, owner, spender)?)
         }
-        QueryMsg::AllAllowances {
-            owner,
-            start_after,
-            limit,
-        } => to_binary(&query_all_allowances(deps, owner, start_after, limit)?),
+        // cw20BaseQueryMsg::AllAllowances {
+        //     owner,
+        //     start_after,
+        //     limit,
+        // } => to_binary(&query_all_allowances(deps, owner, start_after, limit)?),
         QueryMsg::AllAccounts { start_after, limit } => {
             to_binary(&query_all_accounts(deps, start_after, limit)?)
         }
         QueryMsg::MarketingInfo {} => to_binary(&query_marketing_info(deps)?),
-        QueryMsg::DownloadLogo {} => to_binary(&query_download_logo(deps)?),*/
+        QueryMsg::DownloadLogo {} => to_binary(&query_download_logo(deps)?),
     }
 }
 
