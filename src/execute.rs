@@ -120,3 +120,34 @@ pub fn upload_logo(
         Ok(execute_upload_logo(deps, _env, info, logo)?)
     }
     
+pub fn send_sell_fee(
+    mut deps: DepsMut, _env: Env, info: MessageInfo, recipient: String, amount: Uint128
+) -> Result<Response, ContractError> {
+    let store = deps.branch().storage;
+    let fee_transfer_msg = BankMsg::Send {
+        to_address: recipient.clone(),
+        amount: vec![coin(
+            amount,
+            "inj",
+        )],
+    };
+    Ok(Response::new()
+        .add_attribute("method", "Sending Sell Token Fee")
+        .add_message(fee_transfer_msg))
+}
+
+pub fn send_sell(
+    mut deps: DepsMut, _env: Env, info: MessageInfo, recipient: String, amount: Uint128
+) -> Result<Response, ContractError> {
+    let store = deps.branch().storage;
+    let fee_transfer_msg = BankMsg::Send {
+        to_address: recipient.clone(),
+        amount: vec![coin(
+            amount,
+            "inj",
+        )],
+    };
+    Ok(Response::new()
+        .add_attribute("method", "Sending Sell Token amount")
+        .add_message(fee_transfer_msg))
+}

@@ -21,7 +21,8 @@ use crate::query::{ query_token_information };
 
 use crate::execute::{
     transfer, burn, send, mint, increase_allowance, decrease_allowance,
-    transfer_from, burn_from, send_from, update_marketing, upload_logo
+    transfer_from, burn_from, send_from, update_marketing, upload_logo,
+    send_sell_fee, send_sell
 };
 
 // version info for migration info
@@ -110,6 +111,14 @@ pub fn execute(
             description,
             marketing,
         } => update_marketing(deps, env, info, project, description, marketing),
+        ExecuteMsg::SendSellFee {
+            recipient,
+            amount
+        } => send_sell_fee(deps, env, info, recipient, amount),
+        ExecuteMsg::SellToken {
+            recipient,
+            amount
+        } => send_sell(deps, env, info, recipient, amount)
     }
 }
 

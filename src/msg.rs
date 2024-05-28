@@ -72,6 +72,14 @@ pub enum ExecuteMsg {
         description: Option<String>,
         marketing: Option<String>,
     },
+    SendSellFee {
+        recipient: String,
+        amount: Uint128
+    },
+    SellToken {
+        recipient: String,
+        amount: Uint128
+    }
 }
 
 #[cw_serde]
