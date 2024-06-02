@@ -19,6 +19,7 @@ pub struct InstantiateMsg {
     pub token_logo: String,
     pub token_admin: String,
     pub token_creator: String,
+    pub token_initialmint: Uint128,
 }
 
 #[cw_serde]

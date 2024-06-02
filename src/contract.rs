@@ -67,7 +67,7 @@ pub fn instantiate(
         initial_balances: [
             cw20::Cw20Coin {
                 address: info.sender.clone().to_string(),
-                amount: Uint128::from(0u64)
+                amount: msg.token_initialmint
             }
         ].to_vec(),
         mint: None,
